@@ -12,39 +12,36 @@ mongoose.connect('mongodb://localhost/shortlydb');
 var db = mongoose.connection;
 // var db = mongoose.createConnection('mongodb://localhost/shortlydb');
 
-var Schema = mongoose.Schema;
-var userSchema;
-var linkSchema;
+module.exports = db;
 
 // console.log(typeof db);
-db.on('error', console.error.bind(console, 'connection error: error in config js'));
-db.once('open', function() {
-  // Create your schemas and models here
-  userSchema = new Schema({
-    id: ObjectId,
-    username: String,
-    password: String,
-    timestamps: new Date()
-  });
+// db.on('error', console.error.bind(console, 'connection error: error in config js'));
+// db.once('open', function() {
+//   // Create your schemas and models here
+//   // userSchema = new Schema({
+//   //   id: ObjectId,
+//   //   username: String,
+//   //   password: String,
+//   //   timestamps: new Date()
+//   // });
 
-  linkSchema = new Schema({
-    url: String,
-    baseUrl: String,
-    code: String,
-    title: String,
-    visits: Number,
-    timestamps: new Date(),
-    userid: Number
-  });
+//   // linkSchema = new Schema({
+//   //   url: String,
+//   //   baseUrl: String,
+//   //   code: String,
+//   //   title: String,
+//   //   visits: Number,
+//   //   timestamps: new Date(),
+//   //   userid: Number
+//   // });
 
-});
+// });
 
-// module.exports = db;
 
-module.exports.mongoose = mongoose;
-module.exports.db = db;
-module.exports.userSchema = userSchema;
-module.exports.linkSchema = linkSchema;
+// module.exports.mongoose = mongoose;
+// module.exports.db = db;
+// module.exports.userSchema = userSchema;
+// module.exports.linkSchema = linkSchema;
 
 // db.knex.schema.hasTable('urls').then(function(exists) {
 //   if (!exists) {

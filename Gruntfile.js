@@ -21,25 +21,13 @@ module.exports = function(grunt) {
     },
 
     uglify: {
-      myTarget: {
-        files: {
-          'MinConcat/output.min.js': [
-            '*.js',
-            'app/**/*.js', //*.js
-            'db/**/*.js',
-            'lib/**/*.js',
-            'public/**/*.js',
-            'test/**/*.js',
-            'views/**/*.js'
-          ]
-        }
-      }
     },
 
     eslint: {
       target: [
+        // Add list of files to lint here
         '*.js',
-        'app/**/*.js', //*.js
+        'app/**/*.js',
         'db/**/*.js',
         'lib/**/*.js',
         'public/**/*.js',
@@ -58,9 +46,8 @@ module.exports = function(grunt) {
           'public/lib/**/*.js',
         ],
         tasks: [
-          // 'concat',
-          // 'uglify'
-          'eslint'
+          'concat',
+          'uglify'
         ]
       },
       css: {
@@ -71,7 +58,10 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-        command: 'git add . && git commit && git push live master && ^C'
+        command: 'git add . && git commit && git push live master'
+      },
+      repopush: {
+        command: 'git add . && git commit && git push origin master'
       }
     },
   });
@@ -99,7 +89,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', [
     'eslint', 'mochaTest'
-  ]); //eslint, mocha test
+  ]);
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
@@ -111,6 +101,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
     // add your deploy tasks here
+    'build', 'shell:prodServer'
   ]);
 
 
