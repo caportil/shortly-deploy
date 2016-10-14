@@ -21,11 +21,30 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      myTarget: {
+        files: {
+          'MinConcat/output.min.js': [
+            '*.js',
+            'app/**/*.js', //*.js
+            'db/**/*.js',
+            'lib/**/*.js',
+            'public/**/*.js',
+            'test/**/*.js',
+            'views/**/*.js'
+          ]
+        }
+      }
     },
 
     eslint: {
       target: [
-        // Add list of files to lint here
+        '*.js',
+        'app/**/*.js', //*.js
+        'db/**/*.js',
+        'lib/**/*.js',
+        'public/**/*.js',
+        'test/**/*.js',
+        'views/**/*.js'
       ]
     },
 
@@ -39,8 +58,9 @@ module.exports = function(grunt) {
           'public/lib/**/*.js',
         ],
         tasks: [
-          'concat',
-          'uglify'
+          // 'concat',
+          // 'uglify'
+          'eslint'
         ]
       },
       css: {
@@ -78,7 +98,8 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('build', [
-  ]);
+    'eslint', 'mochaTest'
+  ]); //eslint, mocha test
 
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
